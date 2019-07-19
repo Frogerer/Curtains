@@ -16,10 +16,10 @@ public class MyView extends View {
 
     //Variables
     private DisplayMetrics Metrics = getResources().getDisplayMetrics();
-    private Paint paint = new Paint(), greenPaint = new Paint(), blackPaint = new Paint();
     private Rect MainRect;
     private RectF MainRoundRect;
     private Path MainPath = new Path();
+    private Paint paint = new Paint(), greenPaint = new Paint(), blackPaint = new Paint();
 
     public MyView(Context context) {
         super(context);
@@ -33,12 +33,21 @@ public class MyView extends View {
         super(context, attrs, defStyleAttr);
     }
 
+    //My methods
+    private void newRect (double width, double height, double left, double top, double right, double bottom) {
+        MainRect = new Rect((int) (width * left), (int) (height * top), (int) (width * right), (int) (height * bottom));
+    }
+
+    private void newRoundRect (double width, double height, double left, double top, double right, double bottom) {
+        MainRoundRect = new RectF((int) (width * left), (int) (height * top), (int) (width * right), (int) (height * bottom));
+    }
+
     @Override
     public void onDraw(Canvas canvas) {
 
         //Variables
+        double MainWidth, MainHeight;
         int BlackColor = Color.BLACK, GreenColor = Color.argb(255,5,170,55);
-        double MainWidth, MainHeight, percentWidth, percentHeight, marginLeft, marginTop;
         float FrameLineWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 0.5, Metrics);
 
@@ -59,244 +68,131 @@ public class MyView extends View {
         MainWidth = getWidth();
         MainHeight = getHeight();
 
-        ///////good/////////
+        //Window Picture Elements
 
-        //Ramka okna
-        marginLeft = MainWidth * 0.30;
-        marginTop = MainHeight * 0.12;
-        percentWidth = MainWidth * 0.70;
-        percentHeight = MainHeight * 0.42;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Window frame
+        newRect(MainWidth, MainHeight, 0.30, 0.12, 0.70, 0.42);
         canvas.drawRect(MainRect, paint);
 
-        //Ramka okna L
-        marginLeft = MainWidth * 0.28;
-        marginTop = MainHeight * 0.12;
-        percentWidth = MainWidth * 0.30;
-        percentHeight = MainHeight * 0.42;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Window frame L
+        newRect(MainWidth, MainHeight, 0.28, 0.12, 0.30, 0.42);
         canvas.drawRect(MainRect, paint);
 
-        //Ramka okna P
-        marginLeft = MainWidth * 0.70;
-        marginTop = MainHeight * 0.12;
-        percentWidth = MainWidth * 0.72;
-        percentHeight = MainHeight * 0.42;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Window frame R
+        newRect(MainWidth, MainHeight, 0.70, 0.12, 0.72, 0.42);
         canvas.drawRect(MainRect, paint);
 
-        //GL Szyba
-        marginLeft = MainWidth * 0.30;
-        marginTop = MainHeight * 0.12;
-        percentWidth = MainWidth * 0.47;
-        percentHeight = MainHeight * 0.245;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Glass T L
+        newRect(MainWidth, MainHeight, 0.30, 0.12, 0.47, 0.245);
         canvas.drawRect(MainRect, paint);
 
-        //GP Szyba
-        marginLeft = MainWidth * 0.53;
-        marginTop = MainHeight * 0.12;
-        percentWidth = MainWidth * 0.70;
-        percentHeight = MainHeight * 0.245;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Glass T R
+        newRect(MainWidth, MainHeight, 0.53, 0.12, 0.70, 0.245);
         canvas.drawRect(MainRect, paint);
 
-        //DL Szyba
-        marginLeft = MainWidth * 0.30;
-        marginTop = MainHeight * 0.26;
-        percentWidth = MainWidth * 0.47;
-        percentHeight = MainHeight * 0.42;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Glass B L
+        newRect(MainWidth, MainHeight, 0.30, 0.26, 0.47, 0.42);
         canvas.drawRect(MainRect, paint);
 
-        //DP Szyba
-        marginLeft = MainWidth * 0.53;
-        marginTop = MainHeight * 0.26;
-        percentWidth = MainWidth * 0.70;
-        percentHeight = MainHeight * 0.42;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Glass B R
+        newRect(MainWidth, MainHeight, 0.53, 0.26, 0.70, 0.42);
         canvas.drawRect(MainRect, paint);
 
-        //Parapet
-        marginLeft = MainWidth * 0.25;
-        marginTop = MainHeight * 0.42;
-        percentWidth = MainWidth * 0.75;
-        percentHeight = MainHeight * 0.445;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Windowsill
+        newRect(MainWidth, MainHeight, 0.25, 0.42, 0.75, 0.445);
         canvas.drawRect(MainRect, paint);
 
-        //Parapet L
-        marginLeft = MainWidth * 0.24;
-        marginTop = MainHeight * 0.415;
-        percentWidth = MainWidth * 0.25;
-        percentHeight = MainHeight * 0.45;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Windowsill L
+        newRoundRect(MainWidth, MainHeight, 0.24, 0.415, 0.25, 0.45);
         canvas.drawRoundRect(MainRoundRect,3,3, paint);
 
-        //Parapet P
-        marginLeft = MainWidth * 0.75;
-        marginTop = MainHeight * 0.415;
-        percentWidth = MainWidth * 0.76;
-        percentHeight = MainHeight * 0.45;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Windowsill R
+        newRoundRect(MainWidth, MainHeight, 0.75, 0.415, 0.76, 0.45);
         canvas.drawRoundRect(MainRoundRect,3,3, paint);
 
-        //Gzyms D
-        marginLeft = MainWidth * 0.27;
-        marginTop = MainHeight * 0.1;
-        percentWidth = MainWidth * 0.73;
-        percentHeight = MainHeight * 0.12;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRoundRect(MainRoundRect,3,3, paint);
-
-        //Gzyms G
-        marginLeft = MainWidth * 0.245;
-        marginTop = MainHeight * 0.095;
-        percentWidth = MainWidth * 0.755;
-        percentHeight = MainHeight * 0.10;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Cornice T
+        newRoundRect(MainWidth, MainHeight, 0.245, 0.095, 0.755, 0.10);
         canvas.drawRoundRect(MainRoundRect,8,8, paint);
 
-        //Linia okna
-        marginLeft = MainWidth * 0.50;
-        marginTop = MainHeight * 0.12;
-        percentWidth = MainWidth * 0.50;
-        percentHeight = MainHeight * 0.42;
-        canvas.drawLine((int) marginLeft, (int) marginTop, (int) percentWidth, (int) percentHeight, paint);
-
-        //Klamka podstawa L
-        marginLeft = MainWidth * 0.486;
-        marginTop = MainHeight * 0.29;
-        percentWidth = MainWidth * 0.007;
-        canvas.drawCircle((int) marginLeft, (int) marginTop, (int) percentWidth, paint);
-
-        //Klamka podstawa R
-        marginLeft = MainWidth * 0.514;
-        marginTop = MainHeight * 0.29;
-        percentWidth = MainWidth * 0.007;
-        canvas.drawCircle((int) marginLeft, (int) marginTop, (int) percentWidth, paint);
-
-        //Klamka uchwyt L
-        marginLeft = MainWidth * 0.483;
-        marginTop = MainHeight * 0.29;
-        percentWidth = MainWidth * 0.488;
-        percentHeight = MainHeight * 0.315;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRect(MainRect, blackPaint);
-
-        //Klamka uchwyt R
-        marginLeft = MainWidth * 0.512;
-        marginTop = MainHeight * 0.29;
-        percentWidth = MainWidth * 0.517;
-        percentHeight = MainHeight * 0.315;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRect(MainRect, blackPaint);
-
-        //Karnisz
-        marginLeft = MainWidth * 0.06;
-        marginTop = MainHeight * 0.051;
-        percentWidth = MainWidth * 0.94;
-        percentHeight = MainHeight * 0.063;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRoundRect(MainRoundRect,7,7, paint);
-
-        //Zasłona Lewa 1
-        marginLeft = MainWidth * 0.08;
-        marginTop = MainHeight * 0.063;
-        percentWidth = MainWidth * 0.12;
-        percentHeight = MainHeight * 0.47;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRoundRect(MainRoundRect,7,5, paint);
-
-        //Zasłona Lewa 2
-        marginLeft = MainWidth * 0.12;
-        marginTop = MainHeight * 0.063;
-        percentWidth = MainWidth * 0.16;
-        percentHeight = MainHeight * 0.465;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRoundRect(MainRoundRect,1,5, paint);
-
-        //Zasłona Lewa 3
-        marginLeft = MainWidth * 0.16;
-        marginTop = MainHeight * 0.063;
-        percentWidth = MainWidth * 0.20;
-        percentHeight = MainHeight * 0.47;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRoundRect(MainRoundRect,7,5, paint);
-
-        //Zasłona Prawa 1
-        marginLeft = MainWidth * 0.88;
-        marginTop = MainHeight * 0.063;
-        percentWidth = MainWidth * 0.92;
-        percentHeight = MainHeight * 0.47;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRoundRect(MainRoundRect,7,5, paint);
-
-        //Zasłona Prawa 2
-        marginLeft = MainWidth * 0.84;
-        marginTop = MainHeight * 0.063;
-        percentWidth = MainWidth * 0.88;
-        percentHeight = MainHeight * 0.465;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRoundRect(MainRoundRect,1,5, paint);
-
-        //Zasłona Prawa 3
-        marginLeft = MainWidth * 0.80;
-        marginTop = MainHeight * 0.063;
-        percentWidth = MainWidth * 0.84;
-        percentHeight = MainHeight * 0.47;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRoundRect(MainRoundRect,7,5, paint);
-
-        //Doniczka
-        marginLeft = MainWidth * 0.58;
-        marginTop = MainHeight * 0.38;
-        percentWidth = MainWidth * 0.65;
-        percentHeight = MainHeight * 0.415;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
-        canvas.drawRect(MainRect, paint);
-
-        //Podstawka
-        marginLeft = MainWidth * 0.57;
-        marginTop = MainHeight * 0.415;
-        percentWidth = MainWidth * 0.66;
-        percentHeight = MainHeight * 0.42;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Cornice B
+        newRoundRect(MainWidth, MainHeight, 0.27, 0.1, 0.73, 0.12);
         canvas.drawRoundRect(MainRoundRect,3,3, paint);
 
-        //Obramowka
-        marginLeft = MainWidth * 0.57;
-        marginTop = MainHeight * 0.373;
-        percentWidth = MainWidth * 0.66;
-        percentHeight = MainHeight * 0.38;
-        newRoundRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Window line
+        canvas.drawLine((int) (MainWidth * 0.50), (int) (MainHeight * 0.12), (int) (MainWidth * 0.50), (int) (MainHeight * 0.42), paint);
+
+        //Handle L
+        newRect(MainWidth, MainHeight, 0.481, 0.29, 0.489, 0.315);
+        canvas.drawRect(MainRect, blackPaint);
+
+        //Handle R
+        newRect(MainWidth, MainHeight, 0.511, 0.29, 0.519, 0.315);
+        canvas.drawRect(MainRect, blackPaint);
+
+        //Handle base L
+        canvas.drawCircle((int) (MainWidth * 0.486), (int) (MainHeight * 0.29), (int) (MainWidth * 0.007), paint);
+
+        //Handle base R
+        canvas.drawCircle((int) (MainWidth * 0.514), (int) (MainHeight * 0.29), (int) (MainWidth * 0.007), paint);
+
+        //Curtain rod
+        newRoundRect(MainWidth, MainHeight, 0.06, 0.051, 0.94, 0.063);
         canvas.drawRoundRect(MainRoundRect,7,7, paint);
 
-        //Kwiat LL
-        marginLeft = MainWidth * 0.588;
-        marginTop = MainHeight * 0.3729;
-        MainPath.moveTo((float) marginLeft, (float) marginTop);
+        //Curtain L 1
+        newRoundRect(MainWidth, MainHeight, 0.08, 0.063, 0.12, 0.49);
+        canvas.drawRoundRect(MainRoundRect,7,5, paint);
+
+        //Curtain L 2
+        newRoundRect(MainWidth, MainHeight, 0.12, 0.063, 0.16, 0.48);
+        canvas.drawRoundRect(MainRoundRect,1,5, paint);
+
+        //Curtain L 3
+        newRoundRect(MainWidth, MainHeight, 0.16, 0.063, 0.20, 0.49);
+        canvas.drawRoundRect(MainRoundRect,7,5, paint);
+
+        //Curtain R 1
+        newRoundRect(MainWidth, MainHeight, 0.88, 0.063, 0.92, 0.49);
+        canvas.drawRoundRect(MainRoundRect,7,5, paint);
+
+        //Curtain R 2
+        newRoundRect(MainWidth, MainHeight, 0.84, 0.063, 0.88, 0.48);
+        canvas.drawRoundRect(MainRoundRect,1,5, paint);
+
+        //Curtain R 3
+        newRoundRect(MainWidth, MainHeight, 0.80, 0.063, 0.84, 0.49);
+        canvas.drawRoundRect(MainRoundRect,7,5, paint);
+
+        //Flowerpot
+        newRect(MainWidth, MainHeight, 0.58, 0.38, 0.65, 0.415);
+        canvas.drawRect(MainRect, paint);
+
+        //Flowerpot stand
+        newRoundRect(MainWidth, MainHeight, 0.57, 0.415, 0.66, 0.42);
+        canvas.drawRoundRect(MainRoundRect,3,3, paint);
+
+        //Flowerpot frame
+        newRoundRect(MainWidth, MainHeight, 0.57, 0.373, 0.66, 0.38);
+        canvas.drawRoundRect(MainRoundRect,7,7, paint);
+
+        //Leaf L L
+        MainPath.moveTo((float) (MainWidth * 0.588), (float) (MainHeight * 0.3729));
         MainPath.quadTo((float) (MainWidth * 0.575),(float) (MainHeight * 0.35),(float) (MainWidth * 0.555),(float) (MainHeight * 0.34));
-        MainPath.quadTo((float) (MainWidth * 0.59),(float) (MainHeight * 0.35),(float) (MainWidth * 0.605), (float) marginTop);
+        MainPath.quadTo((float) (MainWidth * 0.59),(float) (MainHeight * 0.35),(float) (MainWidth * 0.605), (float) (MainHeight * 0.3729));
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
         canvas.drawPath(MainPath, paint);
 
-        //Kwiat SL
-        marginLeft = MainWidth * 0.605;
-        marginTop = MainHeight * 0.3729;
-
-        MainPath.moveTo((float) marginLeft, (float) marginTop);
+        //Leaf C L
+        MainPath.moveTo((float) (MainWidth * 0.605), (float) (MainHeight * 0.3729));
         MainPath.quadTo((float) (MainWidth * 0.6),(float) (MainHeight * 0.365),(float) (MainWidth * 0.56),(float) (MainHeight * 0.325));
-        MainPath.quadTo((float) (MainWidth * 0.59),(float) (MainHeight * 0.335),(float) (MainWidth * 0.62), (float) marginTop);
+        MainPath.quadTo((float) (MainWidth * 0.59),(float) (MainHeight * 0.335),(float) (MainWidth * 0.62), (float) (MainHeight * 0.3729));
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
         canvas.drawPath(MainPath, paint);
 
-        //Kwiat SP
-        marginLeft = MainWidth * 0.6095;
-        marginTop = MainHeight * 0.36;
-        MainPath.moveTo((float) marginLeft, (float) marginTop);
+        //Leaf C R
+        MainPath.moveTo((float) (MainWidth * 0.6095), (float) (MainHeight * 0.36));
         MainPath.quadTo((float) (MainWidth * 0.62),(float) (MainHeight * 0.33),(float) (MainWidth * 0.65),(float) (MainHeight * 0.31));
         MainPath.quadTo((float) (MainWidth * 0.63),(float) (MainHeight * 0.35),(float) (MainWidth * 0.625), (float) (MainHeight * 0.3729));
         MainPath.lineTo((float) (MainWidth * 0.618), (float) (MainHeight * 0.3729));
@@ -304,58 +200,32 @@ public class MyView extends View {
         canvas.drawPath(MainPath, greenPaint);
         canvas.drawPath(MainPath, paint);
 
-        //Kwiat PP
-        marginLeft = MainWidth * 0.622;
-        marginTop = MainHeight * 0.3729;
-        MainPath.moveTo((float) marginLeft, (float) marginTop);
+        //Leaf R R
+        MainPath.moveTo((float) (MainWidth * 0.622), (float) (MainHeight * 0.3729));
         MainPath.quadTo((float) (MainWidth * 0.64),(float) (MainHeight * 0.35),(float) (MainWidth * 0.68),(float) (MainHeight * 0.34));
         MainPath.quadTo((float) (MainWidth * 0.64),(float) (MainHeight * 0.368),(float) (MainWidth * 0.645), (float) (MainHeight * 0.3729));
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
         canvas.drawPath(MainPath, paint);
 
-        //Kwadrat Wzor GL
-        marginLeft = MainWidth * 0.59;
-        marginTop = MainHeight * 0.385;
-        percentWidth = MainWidth * 0.605;
-        percentHeight = MainHeight * 0.4;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Square pattern T L
+        newRect(MainWidth, MainHeight, 0.59, 0.3865, 0.605, 0.4015);
         canvas.drawRect(MainRect, greenPaint);
         canvas.drawRect(MainRect, paint);
 
-        //Kwadrat Wzor DL
-        marginLeft = MainWidth * 0.6;
-        marginTop = MainHeight * 0.3925;
-        percentWidth = MainWidth * 0.615;
-        percentHeight = MainHeight * 0.4075;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Square pattern B L
+        newRect(MainWidth, MainHeight, 0.6, 0.394, 0.615, 0.409);
         canvas.drawRect(MainRect, greenPaint);
         canvas.drawRect(MainRect, paint);
 
-        //Kwadrat Wzor GP
-        marginLeft = MainWidth * 0.615;
-        marginTop = MainHeight * 0.385;
-        percentWidth = MainWidth * 0.63;
-        percentHeight = MainHeight * 0.4;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Square pattern T R
+        newRect(MainWidth, MainHeight, 0.615, 0.3865, 0.63, 0.4015);
         canvas.drawRect(MainRect, greenPaint);
         canvas.drawRect(MainRect, paint);
 
-        //Kwadrat Wzor DL
-        marginLeft = MainWidth * 0.625;
-        marginTop = MainHeight * 0.3925;
-        percentWidth = MainWidth * 0.64;
-        percentHeight = MainHeight * 0.4075;
-        newRect(marginLeft, marginTop, percentWidth, percentHeight);
+        //Square pattern B R
+        newRect(MainWidth, MainHeight, 0.625, 0.394, 0.64, 0.409);
         canvas.drawRect(MainRect, greenPaint);
         canvas.drawRect(MainRect, paint);
-    }
-
-    private void newRect (double left, double top, double right, double bottom) {
-        MainRect = new Rect((int) left, (int) top, (int) right, (int) bottom);
-    }
-
-    private void newRoundRect (double left, double top, double right, double bottom) {
-        MainRoundRect = new RectF((int) left, (int) top, (int) right, (int) bottom);
     }
 }
