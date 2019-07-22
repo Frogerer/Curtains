@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Curtains</string>
+    <string name="textview">TextView</string>
+    <string name="szerokosc">Szerokosc</string>
+    <string name="wysokosc">Wysokosc</string>
+    <string name="textview11">TextView</string>
 </resources>
