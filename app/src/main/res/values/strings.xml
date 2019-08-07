@@ -4,4 +4,5 @@
     <string name="szerokosc">Szerokosc</string>
     <string name="wysokosc">Wysokosc</string>
     <string name="textview11">TextView</string>
+    <string name="procent_zasloniecia">Procent zasloniecia</string>
 </resources>
