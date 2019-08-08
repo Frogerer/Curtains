@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.example.curtains.MyView
+    <com.example.curtains.SuplaCurtains
         android:id="@+id/cView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -151,7 +151,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="177dp"
         android:layout_marginRight="177dp"
-        android:text="Procent zasloniecia" />
+        android:text="@string/procent_zasloniecia" />
 
 
 </RelativeLayout>

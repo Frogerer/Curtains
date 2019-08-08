@@ -13,39 +13,45 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class MyView extends View {
+public class SuplaCurtains extends View {
 
     //Variables
     private final DisplayMetrics Metrics = getResources().getDisplayMetrics();
     private final Rect MainRect = new Rect();
     private final RectF MainRoundRect = new RectF();
     private final Path MainPath = new Path();
-    private final Paint paint = new Paint(), greenPaint = new Paint(), blackPaint = new Paint(), darkgreenPaint = new Paint();
-    private float mFirstClick, mCurtainWidth, mCurtainMargin, mElWidth, mPercent, mLastTouchX, mLastTouchY;
+    private final Paint paint = new Paint();
+    private final Paint linePaint = new Paint();
+    private final Paint greenPaint = new Paint();
+    private final Paint darkgreenPaint = new Paint();
+    private float mFirstClick, mCurtainWidth, mCurtainMargin, mElWidth, mPercent,
+            mLastTouchX, mLastTouchY;
     private double mThickness = 1, mLineSubtract;
+    private float tempP = 0;
     private boolean mTouchLeft;
     private int mLineColor, mFillColor1, mFillColor2;
-    private RectF workSpace = new RectF();
     private OnPercentChangeListener mOnPercentChangeListener;
-    private float tempP = 0;
+    private RectF workSpace = new RectF();
 
-    public MyView(Context context) {
+    public SuplaCurtains(Context context) {
         super(context);
     }
 
-    public MyView(Context context, AttributeSet attrs) {
+    public SuplaCurtains(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyView(Context context, AttributeSet attrs, int defStyleAttr) { super(context, attrs, defStyleAttr); }
+    public SuplaCurtains(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
 
     public interface OnPercentChangeListener {
-        void onPercentChangeing(MyView rs, float percent);
+        void onPercentChangeing(SuplaCurtains rs, float percent);
     }
 
-    public int getLineColor() {
-        return mLineColor;
-    }
+    //Colors Getters and Setters
+
+    public int getLineColor() { return mLineColor; }
 
     public void setLineColor(int lineColor) {
         mLineColor = lineColor;
@@ -77,22 +83,35 @@ public class MyView extends View {
         invalidate();
     }
 
-    private float getmPercent() {
-        return mPercent;
-    }
+    private float getmPercent() { return mPercent; }
 
-    private void drawRect(Canvas canvas, float leftPercent, float topPercent, float rightPercent, float bottomPercent, Paint paint) {
-        MainRect.set((int) (workSpace.width() * leftPercent + workSpace.left), (int)(workSpace.height() * topPercent + workSpace.top), (int)(workSpace.width() * rightPercent + workSpace.left), (int)(workSpace.height() * bottomPercent + workSpace.top));
+    private void drawRect(Canvas canvas, float leftPercent, float topPercent,
+                          float rightPercent, float bottomPercent, Paint paint) {
+        MainRect.set(
+                (int)(workSpace.width() * leftPercent + workSpace.left),
+                (int)(workSpace.height() * topPercent + workSpace.top),
+                (int)(workSpace.width() * rightPercent + workSpace.left),
+                (int)(workSpace.height() * bottomPercent + workSpace.top));
         canvas.drawRect(MainRect, paint);
     }
 
-    private void drawRoundRect(Canvas canvas, float leftPercent, float topPercent, float rightPercent, float bottomPercent, int rx, int ry, Paint paint) {
-        MainRoundRect.set(workSpace.width() * leftPercent + workSpace.left,workSpace.height() * topPercent + workSpace.top,workSpace.width() * rightPercent + workSpace.left, workSpace.height() * bottomPercent + workSpace.top);
+    private void drawRoundRect(Canvas canvas, float leftPercent, float topPercent,
+                               float rightPercent, float bottomPercent, int rx, int ry, Paint paint) {
+        MainRoundRect.set(
+                workSpace.width() * leftPercent + workSpace.left,
+                workSpace.height() * topPercent + workSpace.top,
+                workSpace.width() * rightPercent + workSpace.left,
+                workSpace.height() * bottomPercent + workSpace.top);
         canvas.drawRoundRect(MainRoundRect,rx,ry, paint);
     }
 
-    private void drawCurtain(Canvas canvas, float left, float right, float bottomPercent, Paint colorPaint) {
-        MainRoundRect.set(workSpace.left + left, workSpace.top + workSpace.height() * 0.05f, workSpace.left + right, workSpace.top + workSpace.height() * bottomPercent);
+    private void drawCurtain(Canvas canvas, float left, float right,
+                             float bottomPercent, Paint colorPaint) {
+        MainRoundRect.set(
+                workSpace.left + left,
+                workSpace.top + workSpace.height() * 0.05f,
+                workSpace.left + right,
+                workSpace.top + workSpace.height() * bottomPercent);
         canvas.drawRoundRect(MainRoundRect, 7, 5, colorPaint);
         canvas.drawRoundRect(MainRoundRect, 7, 5, paint);
     }
@@ -124,9 +143,11 @@ public class MyView extends View {
         }
 
         if (right) {
-            drawCurtain(canvas,workSpace.width()-mCurtainMargin - mElWidth,workSpace.width()-mCurtainMargin,(float) (1 - mLineSubtract), greenPaint);
+            drawCurtain(canvas,workSpace.width()-mCurtainMargin - mElWidth,
+                    workSpace.width()-mCurtainMargin,(float) (1 - mLineSubtract), greenPaint);
         } else {
-            drawCurtain(canvas, mCurtainMargin,mCurtainMargin + mElWidth,(float) (1 - mLineSubtract), greenPaint);
+            drawCurtain(canvas, mCurtainMargin,mCurtainMargin + mElWidth,
+                    (float) (1 - mLineSubtract), greenPaint);
         }
     }
 
@@ -145,7 +166,9 @@ public class MyView extends View {
                 float dX = X - mLastTouchX;
                 float dY = Y - mLastTouchY;
 
-                if (((workSpace.height() * 1) + ((getHeight()-workSpace.height())/2) > mFirstClick) && ((workSpace.height() * 0.08 + ((getHeight()-workSpace.height())/2) < mFirstClick))) {
+                if (((workSpace.height() * 1) + ((getHeight()-workSpace.height())/2) > mFirstClick)
+                        && ((workSpace.height() * 0.08 +
+                        ((getHeight()-workSpace.height())/2) < mFirstClick))) {
                     if (Math.abs(dX) > Math.abs(dY)) {
                         if (mTouchLeft) {
                             dX *= -1;
@@ -178,12 +201,19 @@ public class MyView extends View {
 
     private void calculateConstants() {
         if (getWidth() > getHeight()) {
-            workSpace = new RectF((float)(getWidth()-getHeight())/2,0,getHeight()+ (float) ((getWidth()-getHeight())/2), getHeight());
+            workSpace = new RectF(
+                    (float)(getWidth()-getHeight())/2,
+                    0,
+                    getHeight()+ (float) ((getWidth()-getHeight())/2),
+                    getHeight());
             mThickness = workSpace.height() * 0.003;
             if (mThickness < 0.5) mThickness = 0.5;
             mLineSubtract = mThickness * 2 / workSpace.height();
         } else if (getWidth() < getHeight()) {
-            workSpace = new RectF(0,(float) (getHeight()-getWidth())/2,getWidth(), getWidth()+ (float) ((getHeight()-getWidth())/2));
+            workSpace = new RectF(
+                    0,
+                    (float) (getHeight()-getWidth())/2,getWidth(),
+                    getWidth() + (float) ((getHeight()-getWidth())/2));
             mThickness = workSpace.width() * 0.003;
             if (mThickness < 0.5) mThickness = 0.5;
             mLineSubtract = mThickness * 2 / workSpace.width();
@@ -204,7 +234,8 @@ public class MyView extends View {
         calculateConstants();
 
         //Variables
-        float FrameLineWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (float) mThickness, Metrics);
+        float FrameLineWidth =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (float) mThickness, Metrics);
 
         //Paint Stroke Line
         paint.setStyle(Paint.Style.STROKE);
@@ -212,8 +243,8 @@ public class MyView extends View {
         paint.setColor(mLineColor);
 
         //Paint Fill
-        blackPaint.setStyle(Paint.Style.FILL);
-        blackPaint.setColor(mLineColor);
+        linePaint.setStyle(Paint.Style.FILL);
+        linePaint.setColor(mLineColor);
 
         //Paint Fill Color 1
         greenPaint.setStyle(Paint.Style.FILL);
@@ -247,74 +278,138 @@ public class MyView extends View {
         drawRect(canvas, 0.24f, 0.88f, 0.76f, 0.95f, paint);
 
         //Windowsill L
-        drawRoundRect(canvas, 0.225f,0.87f, 0.24f, 0.96f, 3, 3, paint);
+        drawRoundRect(canvas, 0.225f,0.87f, 0.24f, 0.96f,
+                3, 3, paint);
 
         //Windowsill R
-        drawRoundRect(canvas, 0.76f, 0.87f, 0.775f, 0.96f, 3, 3, paint);
+        drawRoundRect(canvas, 0.76f, 0.87f, 0.775f, 0.96f,
+                3, 3, paint);
 
         //Cornice T
-        drawRoundRect(canvas, 0.23f, 0.11f, 0.77f, 0.125f, 8, 8, paint);
+        drawRoundRect(canvas, 0.23f, 0.11f, 0.77f, 0.125f,
+                8, 8, paint);
 
         //Cornice B
-        drawRoundRect(canvas, 0.26f, 0.125f, 0.74f, 0.16f, 3, 3, paint);
+        drawRoundRect(canvas, 0.26f, 0.125f, 0.74f, 0.16f,
+                3, 3, paint);
 
         //Window line
-        canvas.drawLine((int) (workSpace.width() * 0.50 + workSpace.left), (int) (workSpace.height() * 0.16f + workSpace.top), (int) (workSpace.width() * 0.50 + workSpace.left), (int) (workSpace.height() * 0.88f + workSpace.top), paint);
+        canvas.drawLine(
+                (int) (workSpace.width() * 0.50 + workSpace.left),
+                (int) (workSpace.height() * 0.16f + workSpace.top),
+                (int) (workSpace.width() * 0.50 + workSpace.left),
+                (int) (workSpace.height() * 0.88f + workSpace.top),
+                paint);
 
         //Handle L
-        drawRect(canvas, 0.476f, 0.56f, 0.489f, 0.63f, blackPaint);
+        drawRect(canvas, 0.476f, 0.56f, 0.489f, 0.63f, linePaint);
 
         //Handle R
-        drawRect(canvas, 0.511f, 0.56f, 0.524f, 0.63f, blackPaint);
+        drawRect(canvas, 0.511f, 0.56f, 0.524f, 0.63f, linePaint);
 
         //Handle base L
-        canvas.drawCircle((int) (workSpace.width() * 0.483 + workSpace.left), (int) (workSpace.height() * 0.56 + workSpace.top), (int) (workSpace.width() * 0.007), paint);
+        canvas.drawCircle(
+                (int) (workSpace.width() * 0.483 + workSpace.left),
+                (int) (workSpace.height() * 0.56 + workSpace.top),
+                (int) (workSpace.width() * 0.007),
+                paint);
 
         //Handle base R
-        canvas.drawCircle((int) (workSpace.width() * 0.517 + workSpace.left), (int) (workSpace.height() * 0.56 + workSpace.top), (int) (workSpace.width() * 0.007), paint);
+        canvas.drawCircle(
+                (int) (workSpace.width() * 0.517 + workSpace.left),
+                (int) (workSpace.height() * 0.56 + workSpace.top),
+                (int) (workSpace.width() * 0.007),
+                paint);
 
         //Curtain rod
-        drawRoundRect(canvas, (float) (0 + mLineSubtract), (float) (0 + mLineSubtract), (float) (1 - mLineSubtract), 0.05f, 7, 7, paint);
+        drawRoundRect(canvas,
+                (float) (0 + mLineSubtract),
+                (float) (0 + mLineSubtract), (float) (1 - mLineSubtract),
+                0.05f, 7, 7, paint);
 
         //Flowerpot
         drawRect(canvas, 0.58f, 0.8f, 0.65f, 0.87f, paint);
 
         //Flowerpot stand
-        drawRoundRect(canvas, 0.57f, 0.87f, 0.66f, 0.88f, 3, 3, paint);
+        drawRoundRect(canvas, 0.57f, 0.87f, 0.66f, 0.88f,
+                3, 3, paint);
 
         //Flowerpot frame
-        drawRoundRect(canvas, 0.57f, 0.785f, 0.66f, 0.8f, 7, 7, paint);
+        drawRoundRect(canvas, 0.57f, 0.785f, 0.66f, 0.8f,
+                7, 7, paint);
 
         //Leaf L L
         MainPath.reset();
-        MainPath.moveTo(workSpace.width() * 0.588f + workSpace.left,workSpace.height() * 0.785f + workSpace.top);
-        MainPath.quadTo(workSpace.width() * 0.575f + workSpace.left,workSpace.height() * 0.7392f + workSpace.top,workSpace.width() * 0.555f  + workSpace.left,workSpace.height() * 0.7192f + workSpace.top);
-        MainPath.quadTo(workSpace.width() * 0.59f + workSpace.left,workSpace.height() * 0.7392f + workSpace.top,workSpace.width() * 0.605f + workSpace.left,workSpace.height() * 0.785f + workSpace.top);
+        MainPath.moveTo(
+                workSpace.width() * 0.588f + workSpace.left,
+                workSpace.height() * 0.785f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.575f + workSpace.left,
+                workSpace.height() * 0.7392f + workSpace.top,
+                workSpace.width() * 0.555f  + workSpace.left,
+                workSpace.height() * 0.7192f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.59f + workSpace.left,
+                workSpace.height() * 0.7392f + workSpace.top,
+                workSpace.width() * 0.605f + workSpace.left,
+                workSpace.height() * 0.785f + workSpace.top);
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
         canvas.drawPath(MainPath, paint);
 
         //Leaf C L
-        MainPath.moveTo(workSpace.width() * 0.605f + workSpace.left,workSpace.height() * 0.785f + workSpace.top);
-        MainPath.quadTo(workSpace.width() * 0.6f + workSpace.left,workSpace.height() * 0.7692f + workSpace.top,workSpace.width() * 0.56f + workSpace.left,workSpace.height() * 0.6892f + workSpace.top);
-        MainPath.quadTo(workSpace.width() * 0.59f + workSpace.left,workSpace.height() * 0.7092f + workSpace.top,workSpace.width() * 0.62f + workSpace.left,workSpace.height() * 0.785f + workSpace.top);
+        MainPath.moveTo(
+                workSpace.width() * 0.605f + workSpace.left,
+                workSpace.height() * 0.785f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.6f + workSpace.left,
+                workSpace.height() * 0.7692f + workSpace.top,
+                workSpace.width() * 0.56f + workSpace.left,
+                workSpace.height() * 0.6892f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.59f + workSpace.left,
+                workSpace.height() * 0.7092f + workSpace.top,
+                workSpace.width() * 0.62f + workSpace.left,
+                workSpace.height() * 0.785f + workSpace.top);
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
         canvas.drawPath(MainPath, paint);
 
         //Leaf C R
-        MainPath.moveTo(workSpace.width() * 0.6095f + workSpace.left,workSpace.height() * 0.7592f + workSpace.top);
-        MainPath.quadTo(workSpace.width() * 0.62f + workSpace.left,workSpace.height() * 0.6992f + workSpace.top,workSpace.width() * 0.65f + workSpace.left,workSpace.height() * 0.6592f + workSpace.top);
-        MainPath.quadTo(workSpace.width() * 0.63f + workSpace.left,workSpace.height() * 0.7392f + workSpace.top,workSpace.width() * 0.625f + workSpace.left,workSpace.height() * 0.785f + workSpace.top);
-        MainPath.lineTo(workSpace.width() * 0.618f + workSpace.left,workSpace.height() * 0.785f + workSpace.top);
+        MainPath.moveTo(
+                workSpace.width() * 0.6095f + workSpace.left,
+                workSpace.height() * 0.7592f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.62f + workSpace.left,
+                workSpace.height() * 0.6992f + workSpace.top,
+                workSpace.width() * 0.65f + workSpace.left,
+                workSpace.height() * 0.6592f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.63f + workSpace.left,
+                workSpace.height() * 0.7392f + workSpace.top,
+                workSpace.width() * 0.625f + workSpace.left,
+                workSpace.height() * 0.785f + workSpace.top);
+        MainPath.lineTo(
+                workSpace.width() * 0.618f + workSpace.left,
+                workSpace.height() * 0.785f + workSpace.top);
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
         canvas.drawPath(MainPath, paint);
 
         //Leaf R R
-        MainPath.moveTo(workSpace.width() * 0.622f + workSpace.left,workSpace.height() * 0.785f + workSpace.top);
-        MainPath.quadTo(workSpace.width() * 0.64f + workSpace.left,workSpace.height() * 0.7392f + workSpace.top,workSpace.width() * 0.68f + workSpace.left,workSpace.height() * 0.7192f + workSpace.top);
-        MainPath.quadTo(workSpace.width() * 0.64f + workSpace.left,workSpace.height() * 0.7752f + workSpace.top,workSpace.width() * 0.645f + workSpace.left, workSpace.height() * 0.785f + workSpace.top);
+        MainPath.moveTo(
+                workSpace.width() * 0.622f + workSpace.left,
+                workSpace.height() * 0.785f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.64f + workSpace.left,
+                workSpace.height() * 0.7392f + workSpace.top,
+                workSpace.width() * 0.68f + workSpace.left,
+                workSpace.height() * 0.7192f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.64f + workSpace.left,
+                workSpace.height() * 0.7752f + workSpace.top,
+                workSpace.width() * 0.645f + workSpace.left,
+                workSpace.height() * 0.785f + workSpace.top);
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
         canvas.drawPath(MainPath, paint);

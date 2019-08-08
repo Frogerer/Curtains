@@ -8,10 +8,10 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements MyView.OnPercentChangeListener {
+public class MainActivity extends AppCompatActivity implements SuplaCurtains.OnPercentChangeListener {
 
     private String tempString;
-    private MyView cView;
+    private SuplaCurtains cView;
     private TextView tView, tView2, tView3;
     private SeekBar sBar, sBar2, sBar3;
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements MyView.OnPercentC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        cView = (MyView) findViewById(R.id.cView);
+        cView = (SuplaCurtains) findViewById(R.id.cView);
         cView.setOnPercentChangeListener(this);
 
         sBar = (SeekBar) findViewById(R.id.seekBar1);
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements MyView.OnPercentC
     }
 
     @Override
-    public void onPercentChangeing(MyView rs, float percent) {
+    public void onPercentChangeing(SuplaCurtains rs, float percent) {
         cView.setPercent((int) percent);
         sBar3.setProgress((int)percent);
         tempString = sBar3.getProgress() + "/" + sBar3.getMax();
