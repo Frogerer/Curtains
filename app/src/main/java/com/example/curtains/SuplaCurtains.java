@@ -83,7 +83,7 @@ public class SuplaCurtains extends View {
         invalidate();
     }
 
-    private float getmPercent() { return mPercent; }
+    public float getPercent() { return mPercent; }
 
     private void drawRect(Canvas canvas, float leftPercent, float topPercent,
                           float rightPercent, float bottomPercent, Paint paint) {
@@ -159,7 +159,7 @@ public class SuplaCurtains extends View {
                 mLastTouchX = event.getX();
                 mLastTouchY = event.getY();
                 mTouchLeft = mLastTouchX < workSpace.width() / 2 + workSpace.left;
-                tempP = getmPercent();
+                tempP = getPercent();
             case MotionEvent.ACTION_MOVE:
                 float X = event.getX();
                 float Y = event.getY();
@@ -174,13 +174,13 @@ public class SuplaCurtains extends View {
                             dX *= -1;
                         }
                         float p = dX * 100.f / workSpace.width() * 2f;
-                        setPercent(getmPercent() - p);
+                        setPercent(getPercent() - p);
                     }
                 }
                 mLastTouchX = X;
                 mLastTouchY = Y;
                 if (mOnPercentChangeListener != null) {
-                    mOnPercentChangeListener.onPercentChangeing(this, getmPercent());
+                    mOnPercentChangeListener.onPercentChangeing(this, getPercent());
                 }
                 return true;
             case MotionEvent.ACTION_UP:
@@ -257,68 +257,68 @@ public class SuplaCurtains extends View {
         //Window Picture Elements
 
         //Window frame L
-        drawRect(canvas, 0.275f, 0.16f, 0.30f, 0.88f, paint);
+        drawRect(canvas, 0.2f, 0.16f, 0.24f, 0.88f, paint);
 
         //Window frame R
-        drawRect(canvas, 0.70f, 0.16f, 0.725f, 0.88f, paint);
+        drawRect(canvas, 0.76f, 0.16f, 0.80f, 0.88f, paint);
 
         //Glass T L
-        drawRect(canvas, 0.30f, 0.16f, 0.465f, 0.46f, paint);
+        drawRect(canvas, 0.24f, 0.16f, 0.45f, 0.45f, paint);
 
         //Glass T R
-        drawRect(canvas, 0.535f, 0.16f, 0.70f, 0.46f, paint);
+        drawRect(canvas, 0.55f, 0.16f, 0.76f, 0.45f, paint);
 
         //Glass B L
-        drawRect(canvas, 0.30f, 0.5f, 0.465f, 0.88f, paint);
+        drawRect(canvas, 0.24f, 0.49f, 0.45f, 0.88f, paint);
 
         //Glass B R
-        drawRect(canvas, 0.535f, 0.5f, 0.70f, 0.88f, paint);
+        drawRect(canvas, 0.55f, 0.49f, 0.76f, 0.88f, paint);
 
         //Windowsill
-        drawRect(canvas, 0.24f, 0.88f, 0.76f, 0.95f, paint);
+        drawRect(canvas, 0.16f, 0.88f, 0.84f, 0.95f, paint);
 
         //Windowsill L
-        drawRoundRect(canvas, 0.225f,0.87f, 0.24f, 0.96f,
+        drawRoundRect(canvas, 0.145f,0.87f, 0.16f, 0.96f,
                 3, 3, paint);
 
         //Windowsill R
-        drawRoundRect(canvas, 0.76f, 0.87f, 0.775f, 0.96f,
+        drawRoundRect(canvas, 0.84f, 0.87f, 0.855f, 0.96f,
                 3, 3, paint);
 
         //Cornice T
-        drawRoundRect(canvas, 0.23f, 0.11f, 0.77f, 0.125f,
+        drawRoundRect(canvas, 0.15f, 0.11f, 0.85f, 0.125f,
                 8, 8, paint);
 
         //Cornice B
-        drawRoundRect(canvas, 0.26f, 0.125f, 0.74f, 0.16f,
+        drawRoundRect(canvas, 0.18f, 0.125f, 0.82f, 0.16f,
                 3, 3, paint);
 
         //Window line
         canvas.drawLine(
-                (int) (workSpace.width() * 0.50 + workSpace.left),
+                (int) (workSpace.width() * 0.5 + workSpace.left),
                 (int) (workSpace.height() * 0.16f + workSpace.top),
-                (int) (workSpace.width() * 0.50 + workSpace.left),
+                (int) (workSpace.width() * 0.5 + workSpace.left),
                 (int) (workSpace.height() * 0.88f + workSpace.top),
                 paint);
 
         //Handle L
-        drawRect(canvas, 0.476f, 0.56f, 0.489f, 0.63f, linePaint);
+        drawRect(canvas, 0.4675f, 0.56f, 0.4825f, 0.63f, linePaint);
 
         //Handle R
-        drawRect(canvas, 0.511f, 0.56f, 0.524f, 0.63f, linePaint);
+        drawRect(canvas, 0.5175f, 0.56f, 0.5325f, 0.63f, linePaint);
 
         //Handle base L
         canvas.drawCircle(
-                (int) (workSpace.width() * 0.483 + workSpace.left),
+                (int) (workSpace.width() * 0.475 + workSpace.left),
                 (int) (workSpace.height() * 0.56 + workSpace.top),
-                (int) (workSpace.width() * 0.007),
+                (int) (workSpace.width() * 0.01),
                 paint);
 
         //Handle base R
         canvas.drawCircle(
-                (int) (workSpace.width() * 0.517 + workSpace.left),
+                (int) (workSpace.width() * 0.525 + workSpace.left),
                 (int) (workSpace.height() * 0.56 + workSpace.top),
-                (int) (workSpace.width() * 0.007),
+                (int) (workSpace.width() * 0.01),
                 paint);
 
         //Curtain rod
@@ -328,30 +328,30 @@ public class SuplaCurtains extends View {
                 0.05f, 7, 7, paint);
 
         //Flowerpot
-        drawRect(canvas, 0.58f, 0.8f, 0.65f, 0.87f, paint);
+        drawRect(canvas, 0.61f, 0.8f, 0.7f, 0.87f, paint);
 
         //Flowerpot stand
-        drawRoundRect(canvas, 0.57f, 0.87f, 0.66f, 0.88f,
+        drawRoundRect(canvas, 0.6f, 0.87f, 0.71f, 0.88f,
                 3, 3, paint);
 
         //Flowerpot frame
-        drawRoundRect(canvas, 0.57f, 0.785f, 0.66f, 0.8f,
+        drawRoundRect(canvas, 0.595f, 0.785f, 0.715f, 0.8f,
                 7, 7, paint);
 
         //Leaf L L
         MainPath.reset();
         MainPath.moveTo(
-                workSpace.width() * 0.588f + workSpace.left,
+                workSpace.width() * 0.62f + workSpace.left,
                 workSpace.height() * 0.785f + workSpace.top);
         MainPath.quadTo(
-                workSpace.width() * 0.575f + workSpace.left,
-                workSpace.height() * 0.7392f + workSpace.top,
-                workSpace.width() * 0.555f  + workSpace.left,
-                workSpace.height() * 0.7192f + workSpace.top);
+                workSpace.width() * 0.585f + workSpace.left,
+                workSpace.height() * 0.72f + workSpace.top,
+                workSpace.width() * 0.565f  + workSpace.left,
+                workSpace.height() * 0.7f + workSpace.top);
         MainPath.quadTo(
-                workSpace.width() * 0.59f + workSpace.left,
-                workSpace.height() * 0.7392f + workSpace.top,
-                workSpace.width() * 0.605f + workSpace.left,
+                workSpace.width() * 0.615f + workSpace.left,
+                workSpace.height() * 0.72f + workSpace.top,
+                workSpace.width() * 0.635f + workSpace.left,
                 workSpace.height() * 0.785f + workSpace.top);
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
@@ -359,17 +359,17 @@ public class SuplaCurtains extends View {
 
         //Leaf C L
         MainPath.moveTo(
-                workSpace.width() * 0.605f + workSpace.left,
+                workSpace.width() * 0.635f + workSpace.left,
                 workSpace.height() * 0.785f + workSpace.top);
         MainPath.quadTo(
-                workSpace.width() * 0.6f + workSpace.left,
-                workSpace.height() * 0.7692f + workSpace.top,
-                workSpace.width() * 0.56f + workSpace.left,
-                workSpace.height() * 0.6892f + workSpace.top);
-        MainPath.quadTo(
-                workSpace.width() * 0.59f + workSpace.left,
-                workSpace.height() * 0.7092f + workSpace.top,
                 workSpace.width() * 0.62f + workSpace.left,
+                workSpace.height() * 0.72f + workSpace.top,
+                workSpace.width() * 0.595f + workSpace.left,
+                workSpace.height() * 0.64f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.635f + workSpace.left,
+                workSpace.height() * 0.67f + workSpace.top,
+                workSpace.width() * 0.665f + workSpace.left,
                 workSpace.height() * 0.785f + workSpace.top);
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
@@ -377,20 +377,20 @@ public class SuplaCurtains extends View {
 
         //Leaf C R
         MainPath.moveTo(
-                workSpace.width() * 0.6095f + workSpace.left,
-                workSpace.height() * 0.7592f + workSpace.top);
-        MainPath.quadTo(
-                workSpace.width() * 0.62f + workSpace.left,
-                workSpace.height() * 0.6992f + workSpace.top,
                 workSpace.width() * 0.65f + workSpace.left,
-                workSpace.height() * 0.6592f + workSpace.top);
+                workSpace.height() * 0.73f + workSpace.top);
         MainPath.quadTo(
-                workSpace.width() * 0.63f + workSpace.left,
-                workSpace.height() * 0.7392f + workSpace.top,
-                workSpace.width() * 0.625f + workSpace.left,
+                workSpace.width() * 0.67f + workSpace.left,
+                workSpace.height() * 0.65f + workSpace.top,
+                workSpace.width() * 0.7f + workSpace.left,
+                workSpace.height() * 0.61f + workSpace.top);
+        MainPath.quadTo(
+                workSpace.width() * 0.68f + workSpace.left,
+                workSpace.height() * 0.7f + workSpace.top,
+                workSpace.width() * 0.665f + workSpace.left,
                 workSpace.height() * 0.785f + workSpace.top);
         MainPath.lineTo(
-                workSpace.width() * 0.618f + workSpace.left,
+                workSpace.width() * 0.66f + workSpace.left,
                 workSpace.height() * 0.785f + workSpace.top);
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
@@ -398,37 +398,37 @@ public class SuplaCurtains extends View {
 
         //Leaf R R
         MainPath.moveTo(
-                workSpace.width() * 0.622f + workSpace.left,
+                workSpace.width() * 0.66f + workSpace.left,
                 workSpace.height() * 0.785f + workSpace.top);
         MainPath.quadTo(
-                workSpace.width() * 0.64f + workSpace.left,
-                workSpace.height() * 0.7392f + workSpace.top,
-                workSpace.width() * 0.68f + workSpace.left,
-                workSpace.height() * 0.7192f + workSpace.top);
+                workSpace.width() * 0.695f + workSpace.left,
+                workSpace.height() * 0.7192f + workSpace.top,
+                workSpace.width() * 0.735f + workSpace.left,
+                workSpace.height() * 0.6992f + workSpace.top);
         MainPath.quadTo(
-                workSpace.width() * 0.64f + workSpace.left,
+                workSpace.width() * 0.685f + workSpace.left,
                 workSpace.height() * 0.7752f + workSpace.top,
-                workSpace.width() * 0.645f + workSpace.left,
+                workSpace.width() * 0.695f + workSpace.left,
                 workSpace.height() * 0.785f + workSpace.top);
         MainPath.close();
         canvas.drawPath(MainPath, greenPaint);
         canvas.drawPath(MainPath, paint);
 
         //Square pattern T L
-        drawRect(canvas, 0.59f, 0.813f, 0.605f, 0.843f, greenPaint);
-        drawRect(canvas, 0.59f, 0.813f, 0.605f, 0.843f, paint);
+        drawRect(canvas, 0.625f, 0.813f, 0.645f, 0.843f, greenPaint);
+        drawRect(canvas, 0.625f, 0.813f, 0.645f, 0.843f, paint);
 
         //Square pattern B L
-        drawRect(canvas, 0.6f, 0.828f, 0.615f, 0.858f, greenPaint);
-        drawRect(canvas, 0.6f, 0.828f, 0.615f, 0.858f, paint);
+        drawRect(canvas, 0.6375f, 0.828f, 0.655f, 0.858f, greenPaint);
+        drawRect(canvas, 0.6375f, 0.828f, 0.655f, 0.858f, paint);
 
         //Square pattern T R
-        drawRect(canvas, 0.615f, 0.813f, 0.63f, 0.843f, greenPaint);
-        drawRect(canvas, 0.615f, 0.813f, 0.63f, 0.843f, paint);
+        drawRect(canvas, 0.655f, 0.813f, 0.6725f, 0.843f, greenPaint);
+        drawRect(canvas, 0.655f, 0.813f, 0.6725f, 0.843f, paint);
 
         //Square pattern B R
-        drawRect(canvas, 0.625f, 0.828f, 0.64f, 0.858f, greenPaint);
-        drawRect(canvas, 0.625f, 0.828f, 0.64f, 0.858f, paint);
+        drawRect(canvas, 0.665f, 0.828f, 0.685f, 0.858f, greenPaint);
+        drawRect(canvas, 0.665f, 0.828f, 0.685f, 0.858f, paint);
 
         //Curtain L Creator
         drawCurtains(canvas, false);
