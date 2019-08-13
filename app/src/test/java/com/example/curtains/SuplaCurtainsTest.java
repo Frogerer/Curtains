@@ -69,6 +69,7 @@ public class SuplaCurtainsTest extends Instrumentation{
     @Test
     public void testPercentMinChangeValue() {
         curtains.setPercent(10);
+        assertEquals(10, curtains.getPercent(), 0);
         curtains.setPercent(-20);
         assertEquals(0, curtains.getPercent(), 0);
     }
@@ -76,6 +77,7 @@ public class SuplaCurtainsTest extends Instrumentation{
     @Test
     public void testPercentMaxChangeValue() {
         curtains.setPercent(90);
+        assertEquals(90, curtains.getPercent(), 0);
         curtains.setPercent(170);
         assertEquals(100, curtains.getPercent(), 0);
     }
