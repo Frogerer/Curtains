@@ -56,17 +56,27 @@ public class SuplaCurtainsTest extends Instrumentation{
 
     @Test
     public void testPercentMinValue() {
-        for (int i  = 0; i>=-1000; i--) {
-            curtains.setPercent(i);
-            assertEquals(0, curtains.getPercent(), 0);
-        }
+        curtains.setPercent(-15);
+        assertEquals(0, curtains.getPercent(), 0);
     }
 
     @Test
     public void testPercentMaxValue() {
-        for (int i = 100; i <= 1000; i++) {
-            curtains.setPercent(i);
-            assertEquals(100, curtains.getPercent(), 0);
-        }
+        curtains.setPercent(130);
+        assertEquals(100, curtains.getPercent(), 0);
+    }
+
+    @Test
+    public void testPercentMinChangeValue() {
+        curtains.setPercent(10);
+        curtains.setPercent(-20);
+        assertEquals(0, curtains.getPercent(), 0);
+    }
+
+    @Test
+    public void testPercentMaxChangeValue() {
+        curtains.setPercent(90);
+        curtains.setPercent(170);
+        assertEquals(100, curtains.getPercent(), 0);
     }
 }
