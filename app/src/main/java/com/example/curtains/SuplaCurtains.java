@@ -16,7 +16,7 @@ import android.view.View;
 public class SuplaCurtains extends View {
 
     //Variables
-    private final DisplayMetrics Metrics = getResources().getDisplayMetrics();
+    private final DisplayMetrics Metrics = getResources() == null ? null : getResources().getDisplayMetrics();
     private final Rect MainRect = new Rect();
     private final RectF MainRoundRect = new RectF();
     private final Path MainPath = new Path();
@@ -24,12 +24,14 @@ public class SuplaCurtains extends View {
     private final Paint linePaint = new Paint();
     private final Paint greenPaint = new Paint();
     private final Paint darkgreenPaint = new Paint();
-    private float mFirstClick, mCurtainWidth, mCurtainMargin, mElWidth, mPercent,
-            mLastTouchX, mLastTouchY;
-    private double mThickness = 1, mLineSubtract;
+    private float mFirstClick, mCurtainWidth, mCurtainMargin;
+    private float mElWidth, mLastTouchX, mLastTouchY, mPercent;
     private float tempP = 0;
+    private double mThickness = 1, mLineSubtract;
     private boolean mTouchLeft;
-    private int mLineColor, mFillColor1, mFillColor2;
+    private int mLineColor = 0x000000;
+    private int mFillColor1 = 0x05AA37;
+    private int mFillColor2 = 0x049629;
     private OnPercentChangeListener mOnPercentChangeListener;
     private RectF workSpace = new RectF();
 
